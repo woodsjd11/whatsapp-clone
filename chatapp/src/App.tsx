@@ -1,12 +1,11 @@
-
-import './App.css';
+import { ChakraProvider } from "@chakra-ui/react";
+import ToggleTheme from "./components/ToggleTheme";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-      </header>
-    </div>
+    <ChakraProvider>
+      <ToggleTheme />
+    </ChakraProvider>
   );
 }
 
