@@ -57,7 +57,9 @@ export default function Login() {
     >
       <Heading>Log In</Heading>
       <form onSubmit={formik.handleSubmit}>
-        <FormControl isInvalid={formik.errors.username != null && isSubmitted}>
+        <FormControl
+          isInvalid={formik.errors.username != null && formik.touched.username}
+        >
           <FormLabel fontSize="lg">Username</FormLabel>
           <Input
             name="username"
@@ -68,9 +70,11 @@ export default function Login() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           ></Input>
-          <FormErrorMessage>Invalid Username</FormErrorMessage>
+          <FormErrorMessage>{formik.errors.username}</FormErrorMessage>
         </FormControl>
-        <FormControl isInvalid={formik.errors.password != null && isSubmitted}>
+        <FormControl
+          isInvalid={formik.errors.password != null && formik.touched.password}
+        >
           <FormLabel fontSize="lg">Password</FormLabel>
           <Input
             name="password"
@@ -82,10 +86,16 @@ export default function Login() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           ></Input>
-          <FormErrorMessage>Invalid Password</FormErrorMessage>
+          <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
         </FormControl>
         <ButtonGroup pt="1rem">
-          <Button colorScheme="teal" type="submit" onClick={()=>{setSubmitted(true)}}>
+          <Button
+            colorScheme="teal"
+            type="submit"
+            onClick={() => {
+              setSubmitted(true);
+            }}
+          >
             Log In
           </Button>
           <Button>Sign Up</Button>
