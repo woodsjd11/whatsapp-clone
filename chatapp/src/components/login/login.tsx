@@ -21,12 +21,19 @@ export default function Login() {
     username: yup
       .string()
       .required("Username required!")
-      .min(6, "Username must be >5 characters")
-      .max(20, "Username must be <21 characters"),
+      .min(6, "Username must be between 6 and 20 characters")
+      .max(20, "Username must be between 6 and 20 characters"),
     password: yup
       .string()
       .required("Password required!")
-      .min(6, "Password must be >5 characters"),
+      .min(
+        8,
+        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+      )
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+      ),
   });
 
   const formik: FormikProps<FormValues> = useFormik<FormValues>({
