@@ -10,10 +10,12 @@ import {
 } from "@chakra-ui/react";
 import { useFormik, FormikProps } from "formik";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
 export default function Login() {
   const [isSubmitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   interface FormValues {
     username: string;
@@ -98,7 +100,7 @@ export default function Login() {
           >
             Log In
           </Button>
-          <Button>Sign Up</Button>
+          <Button onClick={()=>{navigate("/register")}}>Sign Up</Button>
         </ButtonGroup>
       </form>
     </VStack>
