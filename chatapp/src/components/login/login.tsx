@@ -9,10 +9,12 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { useFormik, FormikProps } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import * as yup from "yup";
 
 export default function Login() {
+  const [isSubmitted, setSubmitted] = useState(false);
+
   interface FormValues {
     username: string;
     password: string;
@@ -55,7 +57,7 @@ export default function Login() {
     >
       <Heading>Log In</Heading>
       <form onSubmit={formik.handleSubmit}>
-        <FormControl>
+        <FormControl isInvalid={formik.errors.username != null && isSubmitted}>
           <FormLabel fontSize="lg">Username</FormLabel>
           <Input
             name="username"
@@ -68,13 +70,14 @@ export default function Login() {
           ></Input>
           <FormErrorMessage>Invalid Username</FormErrorMessage>
         </FormControl>
-        <FormControl>
+        <FormControl isInvalid={formik.errors.password != null && isSubmitted}>
           <FormLabel fontSize="lg">Password</FormLabel>
           <Input
             name="password"
             placeholder="Enter Password"
             autoComplete="off"
             fontSize="lg"
+            type="password"
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -82,7 +85,7 @@ export default function Login() {
           <FormErrorMessage>Invalid Password</FormErrorMessage>
         </FormControl>
         <ButtonGroup pt="1rem">
-          <Button colorScheme="teal" type="submit">
+          <Button colorScheme="teal" type="submit" onClick={()=>{setSubmitted(true)}}>
             Log In
           </Button>
           <Button>Sign Up</Button>
